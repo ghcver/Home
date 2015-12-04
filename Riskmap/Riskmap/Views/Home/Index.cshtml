@@ -1,0 +1,102 @@
+﻿@using Riskmap.DB
+@model Risk[]
+
+@{
+    ViewBag.Title = "Riskmap";
+    Layout = "";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <style type="text/css">
+        body, html, #mapDiv {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            margin: 0;
+            font-family: "微软雅黑";
+        }
+    </style>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=wEBZaPUh2bYQVvSjDAli7MQa"></script>
+</head>
+<body>
+    <div id="mapDiv"></div>
+</body>
+</html>
+
+<script type="text/javascript">
+    var points = @Html.Raw(Json.Encode(Model));
+
+    var map = new BMap.Map("mapDiv");
+    map.addControl(new BMap.MapTypeControl({ anchor: BMAP_ANCHOR_TOP_LEFT }));
+    map.addControl(new BMap.NavigationControl({ anchor: BMAP_ANCHOR_TOP_RIGHT }));
+    map.centerAndZoom(new BMap.Point(116.417854,39.921988), 6);
+
+    var infoOptions = {
+        width : 200,
+        height: 0
+    }
+
+    var pointOptions = {
+        size: BMAP_POINT_SIZE_BIG,
+        shape: BMAP_POINT_SHAPE_CIRCLE,
+        color: '#FF0033'
+    }
+
+    var mapPoints = [];
+    for (var i = 0; i < points.length; i++) {
+        var mapPoint = new BMap.Point(points[i].Longitude, points[i].Latitude);
+        mapPoint.attachedData = points[i];
+        mapPoint.relativePolygon = null;
+        mapPoints.push(mapPoint);
+    }
+
+    var pointCollection = new BMap.PointCollection(mapPoints, pointOptions); 
+    pointCollection.addEventListener('click', function (e) {
+        var mapPoint = e.point;
+        if(mapPoint.relativePolygon == null)
+        {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function(){
+                if (xmlhttp.readyState == 4)
+                {
+                    var rangePoints = JSON.parse(xmlhttp.responseText);
+                    var polygonPoints = [];
+                    for(var i = 0; i < rangePoints.length; i++)
+                    {
+                        var polygonPoint = new BMap.Point(rangePoints[i].PointLongitude, rangePoints[i].PointLatitude);
+                        polygonPoints.push(polygonPoint);
+                    }
+                    var polygon = new BMap.Polygon(polygonPoints, {strokeColor:"blue", strokeWeight:2, strokeOpacity:0.5});
+                    polygon.addEventListener("click", function (e) {
+                        map.removeOverlay(e.target);
+                    });
+
+                    mapPoint.relativePolygon = polygon;
+                    map.addOverlay(mapPoint.relativePolygon);
+                }
+            };
+            xmlhttp.open("GET", "@Url.Action("GetRange", "Home")?riskID=" + mapPoint.attachedData.ID, true);
+            xmlhttp.send();
+        }
+        else
+        {
+            map.addOverlay(mapPoint.relativePolygon);
+        }
+
+        var point = e.point.attachedData;
+        var content = "<span style='font-size:12px;'>状态：" + point.Status + "<br />面积：" + point.Area + "<br />停产时间："
+                      + point.CloseDate + "<br />确认污染时间：" + point.ConfirmDate + "<br />主要污染物：" 
+                      + point.Pollutant + "<br />完成时间：" + point.FinishDate + "</span>";
+
+        var infoWindow = new BMap.InfoWindow(content, infoOptions);
+        infoWindow.setTitle("<b>" + point.Name + "</b>");
+        map.openInfoWindow(infoWindow, new BMap.Point(point.Longitude, point.Latitude));
+    });
+
+    map.addOverlay(pointCollection);
+</script>
