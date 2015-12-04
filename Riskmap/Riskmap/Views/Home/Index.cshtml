@@ -41,24 +41,10 @@
         height: 0
     }
 
-    var pointOptions = {
-        size: BMAP_POINT_SIZE_BIG,
-        shape: BMAP_POINT_SHAPE_CIRCLE,
-        color: '#FF0033'
-    }
-
-    var mapPoints = [];
-    for (var i = 0; i < points.length; i++) {
-        var mapPoint = new BMap.Point(points[i].Longitude, points[i].Latitude);
-        mapPoint.attachedData = points[i];
-        mapPoint.relativePolygon = null;
-        mapPoints.push(mapPoint);
-    }
-
-    var pointCollection = new BMap.PointCollection(mapPoints, pointOptions); 
-    pointCollection.addEventListener('click', function (e) {
-        var mapPoint = e.point;
-        if(mapPoint.relativePolygon == null)
+    function mapPointClick(e)
+    {
+        var marker = e.target;
+        if(marker.relativePolygon == null)
         {
             var xmlhttp = new XMLHttpRequest();
             xmlhttp.onreadystatechange = function(){
@@ -76,27 +62,33 @@
                         map.removeOverlay(e.target);
                     });
 
-                    mapPoint.relativePolygon = polygon;
-                    map.addOverlay(mapPoint.relativePolygon);
+                    marker.relativePolygon = polygon;
+                    map.addOverlay(marker.relativePolygon);
                 }
             };
-            xmlhttp.open("GET", "@Url.Action("GetRange", "Home")?riskID=" + mapPoint.attachedData.ID, true);
+            xmlhttp.open("GET", "@Url.Action("GetRange", "Home")?riskID=" + marker.attachedData.ID, true);
             xmlhttp.send();
         }
         else
         {
-            map.addOverlay(mapPoint.relativePolygon);
+            map.addOverlay(marker.relativePolygon);
         }
 
-        var point = e.point.attachedData;
+        var point = e.target.attachedData;
         var content = "<span style='font-size:12px;'>状态：" + point.Status + "<br />面积：" + point.Area + "<br />停产时间："
-                      + point.CloseDate + "<br />确认污染时间：" + point.ConfirmDate + "<br />主要污染物：" 
+                      + point.CloseDate + "<br />确认污染时间：" + point.ConfirmDate + "<br />主要污染物："
                       + point.Pollutant + "<br />完成时间：" + point.FinishDate + "</span>";
 
         var infoWindow = new BMap.InfoWindow(content, infoOptions);
         infoWindow.setTitle("<b>" + point.Name + "</b>");
         map.openInfoWindow(infoWindow, new BMap.Point(point.Longitude, point.Latitude));
-    });
+    }
 
-    map.addOverlay(pointCollection);
+    for (var i = 0; i < points.length; i++) {
+        var marker = new BMap.Marker(new BMap.Point(points[i].Longitude, points[i].Latitude));
+        marker.attachedData = points[i];
+        marker.relativePolygon = null;
+        marker.addEventListener("click", mapPointClick);
+        map.addOverlay(marker);
+    }
 </script>
