@@ -1,0 +1,29 @@
+﻿<Window x:Class="PicDown.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PicDown"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize" Icon="icon.ico">
+    <Window.Resources>
+        <RoutedUICommand x:Key="Paste" Text="Paste" />
+    </Window.Resources>
+    <Window.InputBindings>
+        <KeyBinding Gesture="Ctrl+V" Command="{StaticResource Paste}"/>
+    </Window.InputBindings>
+    <Window.CommandBindings>
+        <CommandBinding Command="{StaticResource Paste}" CanExecute="CommandBinding_Paste_CanExecute" Executed="CommandBinding_Paste_Executed"/>
+    </Window.CommandBindings>
+    
+    <Grid>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <ComboBox x:Name="comboBox" Width="149" Margin="0,0,0,40">
+                <ComboBoxItem Content="Shi Ji Jia Yuan" IsSelected="True" />
+                <ComboBoxItem Content="Zhen Ai" />
+            </ComboBox>
+            <TextBox x:Name="textBox" Height="23" Text="" Width="149" Margin="0,0,0,30" VerticalContentAlignment="Center" />
+            <Button x:Name="button" Content="Down" Width="108" Height="37" HorizontalAlignment="Left" Click="button_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>
