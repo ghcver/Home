@@ -1,0 +1,15 @@
+{
+  "title": "Save Tab",
+  "name": "savetab",
+  "version": "1.0.0",
+  "description": "Save web address of Tab to unsorted bookmarks",
+  "main": "index.js",
+  "author": "ghc",
+  "engines": {
+    "firefox": ">=38.0a1"
+  },
+  "license": "MIT",
+  "keywords": [
+    "bookmark,save,tab"
+  ]
+}
