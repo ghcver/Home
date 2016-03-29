@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE configuration [
+  <!ENTITY stockList SYSTEM "StockList.xml">
+]>
+
+<configuration>
+  <queryPriceURL>http://flashhq.gtja.com/cssweb?type=GET_TICK&amp;exchange={0}&amp;stockcode={1}&amp;from={2}</queryPriceURL>
+  <host>58.246.109.58</host>
+  <port>9020</port>
+  <cerPath>cli.p12</cerPath>
+  <cerPassword>111111</cerPassword>
+  <remoteCerCN>MACS-Server</remoteCerCN>
+  <checkPeriod>5</checkPeriod>
+  <doneBackPercent>-0.5</doneBackPercent>
+  <fundAccount></fundAccount>
+  <fundAccountPassword></fundAccountPassword>
+  <communicationPassword></communicationPassword>
+  <phoneNumber></phoneNumber>
+  <branchNO></branchNO>
+  <shAccount></shAccount>
+  <szAccount></szAccount>
+  &stockList;
+</configuration>

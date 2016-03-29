@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<stockList>
+  <!--<stock code="" volume="" stopPrice="" donePrice="" sellPrice="" />-->
+  <stock code="000603" volume="100" stopPrice="" donePrice="19.35" sellPrice="16.00" />
+</stockList>
