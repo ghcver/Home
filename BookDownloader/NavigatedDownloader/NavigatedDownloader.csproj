@@ -117,6 +117,8 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Lib\itextsharp.dll" />
+    <Content Include="Lib\Jurassic.dll" />
     <Content Include="RegEx.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
