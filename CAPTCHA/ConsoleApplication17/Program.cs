@@ -16,13 +16,14 @@ namespace ConsoleApplication17
             //Bitmap bitmap = new Bitmap(@"D:\1.png");
             bitmap = bitmap.Clone(new Rectangle(0, 0, bitmap.Width, bitmap.Height), PixelFormat.Format24bppRgb);
 
-            BinarizationBase binarization = new Binarization3();
+            BinarizationBase binarization = new Binarization1();
             bitmap = binarization.Binarize(bitmap);
             bitmap.Save(@"D:\result.png");
 
-            List<List<Point>> regions = ConnectedRegion.Get4WayRegions(bitmap);
+            List<List<Point>> regions = ConnectedRegion.Get8WayRegions(bitmap);
             int i = 10;
-            foreach(var item in regions)
+            regions = regions.OrderByDescending(item => item.Count).Take(4).ToList();
+            foreach (var item in regions)
             {
                 Bitmap single = new Bitmap(bitmap.Width, bitmap.Height, PixelFormat.Format24bppRgb);
                 foreach(var innerItem in item)
