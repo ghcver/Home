@@ -12,6 +12,23 @@ namespace ConsoleApplication17
     {
         public static List<List<Point>> GetRegions(Bitmap bitmap)
         {
+            Bitmap temp = bitmap;
+            bitmap = new Bitmap(temp.Width + 1, temp.Height + 1, PixelFormat.Format24bppRgb);
+            Graphics graphics = null;
+            try
+            {
+                graphics = Graphics.FromImage(bitmap);
+                graphics.Clear(Color.Transparent);
+                graphics.DrawImage(temp, 1, 1, temp.Width, temp.Height);
+            }
+            finally
+            {
+                if (graphics != null)
+                {
+                    graphics.Dispose();
+                }
+            }
+
             int bag = 0;
             Dictionary<int, List<Point>> dic = new Dictionary<int, List<Point>>();
 

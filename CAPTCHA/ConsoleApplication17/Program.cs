@@ -12,8 +12,8 @@ namespace ConsoleApplication17
     {
         static void Main(string[] args)
         {
-            //Bitmap bitmap = new Bitmap(@"D:\1.jpg");
-            Bitmap bitmap = new Bitmap(@"D:\1.png");
+            Bitmap bitmap = new Bitmap(@"D:\1.jpg");
+            //Bitmap bitmap = new Bitmap(@"D:\1.png");
             bitmap = bitmap.Clone(new Rectangle(0, 0, bitmap.Width, bitmap.Height), PixelFormat.Format24bppRgb);
 
             BinarizationBase binarization = new Binarization2();
