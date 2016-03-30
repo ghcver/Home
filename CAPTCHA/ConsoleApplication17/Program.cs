@@ -20,14 +20,14 @@ namespace ConsoleApplication17
             bitmap = binarization.Binarize(bitmap);
             bitmap.Save(@"D:\result.png");
 
-            List<List<Point>> regions = ConnectedRegion.GetRegions(bitmap);
+            List<List<Point>> regions = ConnectedRegion.Get4WayRegions(bitmap);
             int i = 10;
             foreach(var item in regions)
             {
                 Bitmap single = new Bitmap(bitmap.Width, bitmap.Height, PixelFormat.Format24bppRgb);
                 foreach(var innerItem in item)
                 {
-                    single.SetPixel(innerItem.X, innerItem.Y, Color.White);
+                    single.SetPixel(innerItem.X - 1, innerItem.Y - 1, Color.White);
                 }
                 single.Save(@"D:\" + i + ".png");
                 i++;
