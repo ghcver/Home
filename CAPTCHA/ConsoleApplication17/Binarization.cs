@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,8 +19,6 @@ namespace ConsoleApplication17
 
         public override Bitmap Binarize(Bitmap bitmap)
         {
-            bitmap = bitmap.Clone(new Rectangle(0, 0, bitmap.Width, bitmap.Height), System.Drawing.Imaging.PixelFormat.Format24bppRgb);
-
             for (int i = 1; i < bitmap.Width - 1; i++)
             {
                 for (int j = 1; j < bitmap.Height - 1; j++)
@@ -74,7 +73,7 @@ namespace ConsoleApplication17
                     }
                 }
             }
-            bitmap = bitmap.Clone(new Rectangle(1, 1, bitmap.Width - 2, bitmap.Height - 2), System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+            bitmap = bitmap.Clone(new Rectangle(1, 1, bitmap.Width - 2, bitmap.Height - 2), PixelFormat.Format24bppRgb);
 
             return bitmap;
         }
@@ -157,7 +156,7 @@ namespace ConsoleApplication17
                 colorRank[color] = rank;
             }
 
-            Bitmap result = new Bitmap(bitmap.Width, bitmap.Height);
+            Bitmap result = new Bitmap(bitmap.Width, bitmap.Height, PixelFormat.Format24bppRgb);
             Color hitColor = colorRank.OrderByDescending(i => i.Value).ToArray()[0].Key;
             for (int i = 0; i < bitmap.Width; i++)
             {
@@ -188,7 +187,7 @@ namespace ConsoleApplication17
 
         public override Bitmap Binarize(Bitmap bitmap)
         {
-            Bitmap result = new Bitmap(bitmap.Width, bitmap.Height);
+            Bitmap result = new Bitmap(bitmap.Width, bitmap.Height, PixelFormat.Format24bppRgb);
 
             for (int i = 0; i < bitmap.Width; i++)
             {
