@@ -36,12 +36,6 @@ namespace ConsoleApplication17
 
             for (int j = 1; j < bitmap.Height; j++)
             {
-                List<KeyValuePair<Point, int>> tempLine;
-                tempLine = previousLine;
-                previousLine = currentLine;
-                currentLine = tempLine;
-                currentLine.Clear();
-
                 for (int i = 1; i < bitmap.Width; i++)
                 {
                     Color color = bitmap.GetPixel(i, j);
@@ -53,51 +47,80 @@ namespace ConsoleApplication17
                         int? leftBag = null;
                         Color topColor = bitmap.GetPixel(i, j - 1);
                         Color leftColor = bitmap.GetPixel(i - 1, j);
-                        if(topColor.SameWith(KnownColor.White) == true || leftColor.SameWith(KnownColor.White) == true)
+                        if (topColor.SameWith(KnownColor.White) == true)
                         {
-                            foreach (var item in dic)
+                            foreach(var item in previousLine)
                             {
-                                if (item.Value.Contains(top) == true)
+                                if (item.Key == top)
                                 {
-                                    topBag = item.Key;
+                                    topBag = item.Value;
+                                    break;
                                 }
-                                if (item.Value.Contains(left) == true)
-                                {
-                                    leftBag = item.Key;
-                                }
-                            }
-                            if(topBag == null)
-                            {
-                                dic[leftBag.Value].Add(new Point(i, j));
-                                continue;
-                            }
-                            if (leftBag == null)
-                            {
-                                dic[topBag.Value].Add(new Point(i, j));
-                                continue;
-                            }
-
-                            if(topBag.Value == leftBag.Value)
-                            {
-                                dic[topBag.Value].Add(new Point(i, j));
-                            }
-                            else
-                            {
-                                int small = Math.Min(topBag.Value, leftBag.Value);
-                                int larg = Math.Max(topBag.Value, leftBag.Value);
-                                dic[small].Add(new Point(i, j));
-                                dic[small].AddRange(dic[larg]);
-                                dic.Remove(larg);
                             }
                         }
-                        else
+                        if (leftColor.SameWith(KnownColor.White) == true)
+                        {
+                            leftBag = currentLine.Last().Value;
+                        }
+
+                        if(topBag == null && leftBag == null)
                         {
                             dic[bag] = new List<Point>() { new Point(i, j) };
                             currentLine.Add(new KeyValuePair<Point, int>(new Point(i, j), bag));
                             bag++;
                         }
+                        else
+                        {
+                            if (topBag == null)
+                            {
+                                dic[leftBag.Value].Add(new Point(i, j));
+                                currentLine.Add(new KeyValuePair<Point, int>(new Point(i, j), leftBag.Value));
+                                continue;
+                            }
+                            if (leftBag == null)
+                            {
+                                dic[topBag.Value].Add(new Point(i, j));
+                                currentLine.Add(new KeyValuePair<Point, int>(new Point(i, j), topBag.Value));
+                                continue;
+                            }
+                            if (topBag.Value == leftBag.Value)
+                            {
+                                dic[topBag.Value].Add(new Point(i, j));
+                                currentLine.Add(new KeyValuePair<Point, int>(new Point(i, j), topBag.Value));
+                            }
+                            else
+                            {
+                                int small = Math.Min(topBag.Value, leftBag.Value);
+                                int larg = Math.Max(topBag.Value, leftBag.Value);
+                                dic[small].AddRange(dic[larg]);
+                                dic.Remove(larg);
+                                for(int k = 0; k < previousLine.Count; k++)
+                                {
+                                    if(previousLine[k].Value == larg)
+                                    {
+                                        previousLine[k] = new KeyValuePair<Point, int>(previousLine[k].Key, small);
+                                    }
+                                }
+                                for (int k = 0; k < currentLine.Count; k++)
+                                {
+                                    if (currentLine[k].Value == larg)
+                                    {
+                                        currentLine[k] = new KeyValuePair<Point, int>(currentLine[k].Key, small);
+                                    }
+                                }
+
+                                dic[small].Add(new Point(i, j));
+                                currentLine.Add(new KeyValuePair<Point, int>(new Point(i, j), small));
+                            }
+                        }
                     }
                 }
+
+                List<KeyValuePair<Point, int>> tempLine;
+                tempLine = previousLine;
+                previousLine = currentLine;
+                currentLine = tempLine;
+                currentLine.Clear();
             }
 
             return dic.Values.ToList();

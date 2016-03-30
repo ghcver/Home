@@ -16,7 +16,7 @@ namespace ConsoleApplication17
             //Bitmap bitmap = new Bitmap(@"D:\1.png");
             bitmap = bitmap.Clone(new Rectangle(0, 0, bitmap.Width, bitmap.Height), PixelFormat.Format24bppRgb);
 
-            BinarizationBase binarization = new Binarization2();
+            BinarizationBase binarization = new Binarization3();
             bitmap = binarization.Binarize(bitmap);
             bitmap.Save(@"D:\result.png");
 
@@ -30,6 +30,7 @@ namespace ConsoleApplication17
                     single.SetPixel(innerItem.X - 1, innerItem.Y - 1, Color.White);
                 }
                 single.Save(@"D:\" + i + ".png");
+                single.Dispose();
                 i++;
             }
         }
