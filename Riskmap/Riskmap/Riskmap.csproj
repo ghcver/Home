@@ -142,6 +142,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PollutionController.cs" />
     <Compile Include="DB\DBModel.cs" />
     <Compile Include="DB\Range.cs" />
     <Compile Include="DB\Range_Backup.cs" />
@@ -153,6 +154,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\As.txt" />
+    <Content Include="App_Data\Cd.txt" />
+    <Content Include="App_Data\Cr.txt" />
+    <Content Include="App_Data\Cu.txt" />
+    <Content Include="App_Data\Pd.txt" />
+    <Content Include="App_Data\Zn.txt" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Web.config">
@@ -182,6 +189,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\PublishProfiles\MyProfile.pubxml" />
+    <Content Include="Views\Pollution\Index.cshtml" />
+    <Content Include="Views\Pollution\Show.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
