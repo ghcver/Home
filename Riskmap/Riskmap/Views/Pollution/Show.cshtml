@@ -21,7 +21,7 @@
             font-family: "微软雅黑";
         }
     </style>
-    <script type="text/javascript" src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0"></script>
+    <script type="text/javascript" src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0&mkt=zh-HK"></script>
 </head>
 <body>
     <div id="mapDiv"></div>
@@ -44,7 +44,7 @@
         var color = (0 - 255) * (value - baseValue) / (maxValue - baseValue) + 255;
         color = color < 0 ? 0 : parseInt(color);
         
-        var css = "<div style='border-radius:50%;width:10px;height:10px;background:rgb(" + color + ",0,0);' />";
+        var css = "<div title='" + value + "' style='font-size:30px;color:rgb(" + color + ",0,0);'>•</div>";
         var pushpin = new Microsoft.Maps.Pushpin({latitude: sites[i].Latitude, longitude: sites[i].Longitude}, {width: null, height: null, htmlContent: css});
         map.entities.push(pushpin);
     }

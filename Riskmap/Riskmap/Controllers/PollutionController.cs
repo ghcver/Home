@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -57,6 +58,9 @@ namespace Riskmap.Controllers
                 string[] temp = item.Split('\t');
                 list.Add(new Site(decimal.Parse(temp[0]), decimal.Parse(temp[1]), decimal.Parse(temp[2])));
             }
+
+            decimal line = decimal.Parse(ConfigurationManager.AppSettings[filename]);
+            list = list.Where(i => i.Value > line).ToList();
 
             return list;
         }
