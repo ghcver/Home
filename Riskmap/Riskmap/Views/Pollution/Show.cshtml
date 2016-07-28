@@ -37,11 +37,13 @@
     map = new Microsoft.Maps.Map(document.getElementById('mapDiv'), {credentials: 'Ak2cdJ3QVMNBLp6-l6r4gBxAM_y8hfAdMZSHdRXwNV25byOrQXurOfJ0l5OJ_FHU'});
     map.setView({center: {latitude: 39.9053750566, longitude: 116.3972221279}, zoom: 6});
     
+    var maxValue = 5 * baseValue;
     for(var i = 0; i < sites.length; i++)
     {
         var value = sites[i].Value;
-        var times = value / baseValue; 
-        var color = 100;
+        var color = (0 - 255) * (value - baseValue) / (maxValue - baseValue) + 255;
+        color = color < 0 ? 0 : parseInt(color);
+        
         var css = "<div style='border-radius:50%;width:10px;height:10px;background:rgb(" + color + ",0,0);' />";
         var pushpin = new Microsoft.Maps.Pushpin({latitude: sites[i].Latitude, longitude: sites[i].Longitude}, {width: null, height: null, htmlContent: css});
         map.entities.push(pushpin);
