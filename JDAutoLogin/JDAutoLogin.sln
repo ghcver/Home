@@ -1,0 +1,57 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JDAutoLogin", "JDAutoLogin\JDAutoLogin.csproj", "{7213F86A-F582-4242-992D-2E40EC24F7E3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthCode", "AuthCode\AuthCode.csproj", "{644DCF7C-AD70-40C3-95DA-E437F49139E7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cookie", "Cookie\Cookie.csproj", "{4F455B13-FB73-4C54-B386-AF1D2C63E875}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7213F86A-F582-4242-992D-2E40EC24F7E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7213F86A-F582-4242-992D-2E40EC24F7E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7213F86A-F582-4242-992D-2E40EC24F7E3}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{7213F86A-F582-4242-992D-2E40EC24F7E3}.Debug|x86.ActiveCfg = Debug|x86
+		{7213F86A-F582-4242-992D-2E40EC24F7E3}.Debug|x86.Build.0 = Debug|x86
+		{7213F86A-F582-4242-992D-2E40EC24F7E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7213F86A-F582-4242-992D-2E40EC24F7E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7213F86A-F582-4242-992D-2E40EC24F7E3}.Release|x64.ActiveCfg = Release|Any CPU
+		{7213F86A-F582-4242-992D-2E40EC24F7E3}.Release|x86.ActiveCfg = Release|Any CPU
+		{644DCF7C-AD70-40C3-95DA-E437F49139E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{644DCF7C-AD70-40C3-95DA-E437F49139E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{644DCF7C-AD70-40C3-95DA-E437F49139E7}.Debug|x64.ActiveCfg = Debug|x64
+		{644DCF7C-AD70-40C3-95DA-E437F49139E7}.Debug|x64.Build.0 = Debug|x64
+		{644DCF7C-AD70-40C3-95DA-E437F49139E7}.Debug|x86.ActiveCfg = Debug|x86
+		{644DCF7C-AD70-40C3-95DA-E437F49139E7}.Debug|x86.Build.0 = Debug|x86
+		{644DCF7C-AD70-40C3-95DA-E437F49139E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{644DCF7C-AD70-40C3-95DA-E437F49139E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{644DCF7C-AD70-40C3-95DA-E437F49139E7}.Release|x64.ActiveCfg = Release|x64
+		{644DCF7C-AD70-40C3-95DA-E437F49139E7}.Release|x64.Build.0 = Release|x64
+		{644DCF7C-AD70-40C3-95DA-E437F49139E7}.Release|x86.ActiveCfg = Release|x86
+		{644DCF7C-AD70-40C3-95DA-E437F49139E7}.Release|x86.Build.0 = Release|x86
+		{4F455B13-FB73-4C54-B386-AF1D2C63E875}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F455B13-FB73-4C54-B386-AF1D2C63E875}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F455B13-FB73-4C54-B386-AF1D2C63E875}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{4F455B13-FB73-4C54-B386-AF1D2C63E875}.Debug|x86.ActiveCfg = Debug|x86
+		{4F455B13-FB73-4C54-B386-AF1D2C63E875}.Debug|x86.Build.0 = Debug|x86
+		{4F455B13-FB73-4C54-B386-AF1D2C63E875}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F455B13-FB73-4C54-B386-AF1D2C63E875}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F455B13-FB73-4C54-B386-AF1D2C63E875}.Release|x64.ActiveCfg = Release|Any CPU
+		{4F455B13-FB73-4C54-B386-AF1D2C63E875}.Release|x86.ActiveCfg = Release|x86
+		{4F455B13-FB73-4C54-B386-AF1D2C63E875}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
